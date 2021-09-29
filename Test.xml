@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body>
+    <ns2:getPersonResponse xmlns:ns2="http://ivoronline.com/soap">
+      <name>John</name>
+    </ns2:getPersonResponse>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
