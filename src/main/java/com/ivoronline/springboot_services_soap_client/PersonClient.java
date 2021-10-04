@@ -27,20 +27,22 @@ public class PersonClient {
     Document            requestSOAP       = UtilSOAP.createSOAPDocument(requestDocument);
     String              requestString     = UtilXML.documentToString(requestSOAP);
 
-    //SEND  REQUEST
+    //CONFIGURE REQUEST PARAMETERS
     URI                 serverURI         = new URI(serverURL);
-    RestTemplate        restTemplate      = new RestTemplate();
     HttpHeaders         headers           = new HttpHeaders();
                         headers.set("Content-Type", "text/xml;charset=UTF-8");
     HttpEntity<String>  entity            = new HttpEntity<>(requestString, headers);
+
+    //SEND  REQUEST
+    RestTemplate        restTemplate      = new RestTemplate();
     String              responseString    = restTemplate.postForObject(serverURI, entity, String.class);
 
     //UNMARSHAL RESPONSE XML INTO OBJECT
-    Document          responsetDocument  = UtilSOAP.extractSOAPBody(responseString);
-    GetPersonResponse getPersonResponse = (GetPersonResponse) UtilXML.unmarshal(responsetDocument, GetPersonResponse.class);
+    Document            responsetDocument = UtilSOAP.extractSOAPBody(responseString);
+    GetPersonResponse   getPersonResponse = (GetPersonResponse) UtilXML.unmarshal(responsetDocument, GetPersonResponse.class);
 
     //GET PERSON NAME
-    String name = getPersonResponse.getName();
+    String              name              = getPersonResponse.getName();
 
     //DISPLAY REQUEST & RESPONSE
     System.out.println(requestString);
